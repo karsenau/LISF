@@ -116,6 +116,10 @@ subroutine LIS_metforcing_plugin
    use gdas_forcingMod
 #endif
 
+#if ( defined MF_GDASNC )
+   use gdasnc_forcingMod
+#endif
+
 #if ( defined MF_GEOS )
    use geos_forcingMod
 #endif
@@ -375,12 +379,18 @@ subroutine LIS_metforcing_plugin
    external reset_pptEnsFcst
 #endif
 
-
 #if ( defined MF_GDAS )
    external get_gdas
    external timeinterp_gdas
    external reset_gdas
    external finalize_gdas
+#endif
+
+#if ( defined MF_GDASNC )
+   external get_gdasnc
+   external timeinterp_gdasnc
+   external reset_gdasnc
+   external finalize_gdasnc
 #endif
 
 #if ( defined MF_GEOS )
@@ -813,6 +823,15 @@ subroutine LIS_metforcing_plugin
    call registertimeinterpmetforc(trim(LIS_gdasId)//char(0),timeinterp_gdas)
    call registerresetmetforc(trim(LIS_gdasId)//char(0),reset_gdas)
    call registerfinalmetforc(trim(LIS_gdasId)//char(0),finalize_gdas)
+#endif
+
+#if ( defined MF_GDASNC )
+! - GDAS (NETCDF4) Forcing:
+   call registerinitmetforc(trim(LIS_gdasncId)//char(0),init_gdasnc)
+   call registerretrievemetforc(trim(LIS_gdasncId)//char(0),get_gdasnc)
+   call registertimeinterpmetforc(trim(LIS_gdasncId)//char(0),timeinterp_gdasnc)
+   call registerresetmetforc(trim(LIS_gdasncId)//char(0),reset_gdasnc)
+   call registerfinalmetforc(trim(LIS_gdasncId)//char(0),finalize_gdasnc)
 #endif
 
 #if ( defined MF_GEOS )

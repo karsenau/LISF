@@ -119,6 +119,7 @@ module LIS_pluginIndices
    character*50, public,  parameter :: LIS_pptensfcstId      = "PPTEnsFcst"
 
    character*50, public,  parameter :: LIS_gdasId            = "GDAS"
+   character*50, public,  parameter :: LIS_gdasncId          = "GDASNC"
    character*50, public,  parameter :: LIS_gdasT1534Id       = "GDAS T1534"
    character*50, public,  parameter :: LIS_geosId            = "GEOS"
    character*50, public,  parameter :: LIS_geos5fcstId       = "GEOS5 forecast"
@@ -193,9 +194,9 @@ module LIS_pluginIndices
 !-------------------------------------------------------------------------
 ! greenness data sources
 !-------------------------------------------------------------------------
-   character*50, public,  parameter :: LIS_NESDISgfracId ="NESDIS weekly"
-   character*50, public,  parameter :: LIS_SPORTgfracId = "SPORT"
-   character*50, public,  parameter :: LIS_VIIRSgfracId = "VIIRS"
+   character*50, public,  parameter :: LIS_NESDISgfracId = "NESDIS weekly"
+   character*50, public,  parameter :: LIS_SPORTgfracId  = "SPORT"
+   character*50, public,  parameter :: LIS_VIIRSgfracId  = "VIIRS"
    character*50, public,  parameter :: LIS_ALMIPIIgfracId = "ALMIPII"
 !-------------------------------------------------------------------------
 ! roughness data sources
