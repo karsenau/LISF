@@ -249,7 +249,6 @@ subroutine retrieve_gdasnc_variables(n, findex, filename, dataStrucflag,&
 ! Netcdf-4 parameters and fields:
   integer   :: ftn, varId, ncId, nrId
   integer   :: numcols, numrows
-!  character(14), dimension(gdas_struc(n)%nmif), parameter :: gdasnc_fv = (/  &
   character(14), dimension(9), parameter :: gdasnc_fv = (/  &
        'TMP_2m_inst   ',  &
        'SPFH_2m_inst  ',  &
@@ -272,10 +271,6 @@ subroutine retrieve_gdasnc_variables(n, findex, filename, dataStrucflag,&
 
 #if (defined USE_NETCDF3 || defined USE_NETCDF4)
 
-! GRIB ENTRIES
-!  pds5 = (/ 011,051,204,205,033,034,001,059,214 /) !parameter
-!  pds7 = (/ 002,002,000,000,010,010,000,000,000 /) !htlev2
-
   if(dataStrucflag) then
     ! HKB...All instantaneous fields in f00 files
 !    pds16 = (/010,010,010,010,010,010,010,010,010 /)
@@ -285,8 +280,6 @@ subroutine retrieve_gdasnc_variables(n, findex, filename, dataStrucflag,&
 !    pds16 = (/010,010,003,003,010,010,010,003,003 /) 
     ivmax = 9
   endif
-! GRIB ENTRIES
-! USE ABOVE INFO FOR GDAS_NC FIELD EXTRACTION ...
 
   ngdas = (gdas_struc(n)%ncold*gdas_struc(n)%nrold)
 
