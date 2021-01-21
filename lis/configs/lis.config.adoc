@@ -296,6 +296,7 @@ Acceptable values for the sources are:
 
 |"`none`"                      | None
 |"`GDAS`"                      | GDAS
+|"`GDASNC`"                    | GDAS-NetCDF4 reader
 |"`GEOS`"                      | GEOS
 |"`GEOS5 forecast`"            | GEOS5 Forecast
 |"`GEFS forecast`"             | GEFS Forecast
@@ -4789,6 +4790,18 @@ forcing files.
 .Example _lis.config_ entry
 ....
 GDAS forcing directory:            ./input/FORCING/GDAS/
+....
+
+
+[[sssec_forcings_gdasnc,GDASNC]]
+==== GDASNC
+
+`GDAS-NC forcing directory:` specifies the location of the GDAS
+netCDF4 formatted forcing files.
+
+.Example _lis.config_ entry
+....
+GDAS-NC forcing directory:     ./input/FORCING/GDAS_NC/
 ....
 
 
