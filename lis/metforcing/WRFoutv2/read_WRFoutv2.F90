@@ -1,7 +1,9 @@
 !-----------------------BEGIN NOTICE -- DO NOT EDIT-----------------------
-! NASA Goddard Space Flight Center Land Information System (LIS) v7.2
+! NASA Goddard Space Flight Center
+! Land Information System Framework (LISF)
+! Version 7.3
 !
-! Copyright (c) 2015 United States Government as represented by the
+! Copyright (c) 2020 United States Government as represented by the
 ! Administrator of the National Aeronautics and Space Administration.
 ! All Rights Reserved.
 !-------------------------END NOTICE -- DO NOT EDIT-----------------------
@@ -56,7 +58,7 @@ subroutine read_WRFoutv2( order, n, findex, yr, mon, da, hr, ferror )
 !  5. U10         10m U-dir wind vector [m s-1] \newline
 !  6. V10         10m V-dir wind vector [m s-1] \newline
 !  7. PSFC        Surface pressure [Pa] \newline
-!  8. PREC_ACC_NC Precipitation [kg m-2 s-1] \newline
+!  8. PREC_ACC_NC Precipitation [mm] \newline
 !
 !  \begin{description}
 !  \item[order]

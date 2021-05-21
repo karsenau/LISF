@@ -1,7 +1,9 @@
 !-----------------------BEGIN NOTICE -- DO NOT EDIT-----------------------
-! NASA Goddard Space Flight Center Land Information System (LIS) v7.2
+! NASA Goddard Space Flight Center
+! Land Information System Framework (LISF)
+! Version 7.3
 !
-! Copyright (c) 2015 United States Government as represented by the
+! Copyright (c) 2020 United States Government as represented by the
 ! Administrator of the National Aeronautics and Space Administration.
 ! All Rights Reserved.
 !-------------------------END NOTICE -- DO NOT EDIT-----------------------
@@ -107,6 +109,7 @@ contains
         LIS_nss_halo_ind, LIS_nse_halo_ind
   use LIS_timeMgrMod, only : LIS_update_timestep, LIS_calendar
   use LIS_logMod,     only : LIS_logunit, LIS_endrun, LIS_verify
+  use LIS_spatialDownscalingMod, only : LIS_init_pcpclimo_native
   use LIS_forecastMod
   use map_utils   ! KRA
 
@@ -345,6 +348,18 @@ contains
          write(LIS_logunit,*) "  - bilinear, budget-bilinear, or neighbor - "
          call LIS_endrun
        end select
+
+       ! Read in WRF-forcing terrain height file
+       if ( LIS_rc%met_ecor(findex) .ne. "none" ) then  ! KRA
+          call read_WRFoutv2_elev(n,findex)
+       endif
+
+       ! Set up precipitation climate downscaling:
+       if(LIS_rc%pcp_downscale(findex).ne.0) then
+          call LIS_init_pcpclimo_native(n,findex,&
+               WRFoutv2_struc(n)%nc,&
+               WRFoutv2_struc(n)%nr)
+       endif
 
     enddo
 

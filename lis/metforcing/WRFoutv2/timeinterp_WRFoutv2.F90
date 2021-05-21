@@ -1,7 +1,9 @@
 !-----------------------BEGIN NOTICE -- DO NOT EDIT-----------------------
-! NASA Goddard Space Flight Center Land Information System (LIS) v7.2
+! NASA Goddard Space Flight Center
+! Land Information System Framework (LISF)
+! Version 7.3
 !
-! Copyright (c) 2015 United States Government as represented by the
+! Copyright (c) 2020 United States Government as represented by the
 ! Administrator of the National Aeronautics and Space Administration.
 ! All Rights Reserved.
 !-------------------------END NOTICE -- DO NOT EDIT-----------------------
@@ -194,7 +196,7 @@ subroutine timeinterp_WRFoutv2(n, findex)
                 + wt2 * WRFoutv2_struc(n)%metdata2(kk,6,index1)
        psurf(t) = wt1 * WRFoutv2_struc(n)%metdata1(kk,7,index1) & 
                 + wt2 * WRFoutv2_struc(n)%metdata2(kk,7,index1)
-       pcp(t) = WRFoutv2_struc(n)%metdata1(kk,8,index1)
+       pcp(t) = WRFoutv2_struc(n)%metdata1(kk,8,index1)/3600.  ! Convert to mm/sec
      enddo
   enddo
 

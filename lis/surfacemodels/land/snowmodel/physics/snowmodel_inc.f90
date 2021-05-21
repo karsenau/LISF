@@ -8,7 +8,9 @@ module snowmodel_inc
   !   larger domain, then you have to change these numbers and
   !   recompile the code.
   
-  integer,parameter :: nx_max=1001,ny_max=1001
+!  integer,parameter :: nx_max=1001,ny_max=1001
+  integer,parameter :: nx_max=3131,ny_max=3603
+!  integer,parameter :: nx_max=10001,ny_max=10001
   
   ! max_time_steps defines the maximum number of time steps that
   !   will be used in the current compliled version of the code.

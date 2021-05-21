@@ -25,7 +25,7 @@ subroutine timeinterp_nldas2(n,findex)
   use LIS_metforcingMod, only : LIS_forc, LIS_FORC_Base_State
   use LIS_FORC_AttributesMod
   use LIS_timeMgrMod, only : LIS_tick, LIS_time2date
-  use LIS_logMod,     only : LIS_logunit, LIS_verify
+  use LIS_logMod,     only : LIS_logunit, LIS_verify, LIS_endrun
   use nldas2_forcingMod, only : nldas2_struc
   use LIS_forecastMod, only : LIS_get_iteration_index
  
@@ -147,9 +147,16 @@ subroutine timeinterp_nldas2(n,findex)
        rc=status)
   call LIS_verify(status, 'Error: Enable Rainf in the forcing variables list')
 
-  call ESMF_StateGet(LIS_FORC_Base_State(n,findex),LIS_FORC_CRainf%varname(1),cpcpField,&
-       rc=status)
-  call LIS_verify(status, 'Error: Enable CRainf in the forcing variables list')
+!  if (LIS_FORC_CRainf%selectOpt.eq.1) then
+     call ESMF_StateGet(LIS_FORC_Base_State(n,findex),LIS_FORC_CRainf%varname(1),cpcpField,&
+          rc=status)
+     call LIS_verify(status, 'Error: Enable CRainf in the forcing variables list')
+!  else
+!     write(LIS_logunit,*)"[ERR] NLDAS-2 forcing reader currently expects convective rainfall"
+!     write(LIS_logunit,*)"[ERR]  as a metforcing input turned on in your forcing vars table."
+!     write(LIS_logunit,*)"[ERR]  Set 'CRainf:' to 1"
+!     call LIS_endrun 
+!  endif
 
   if(LIS_FORC_Forc_Hgt%selectOpt.eq.1) then 
      call ESMF_StateGet(LIS_FORC_Base_State(n,findex),LIS_FORC_Forc_Hgt%varname(1),&
