@@ -440,8 +440,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Land surface Verification Toolkit (LVT): LVT 7.4 Users&#8217; Guide</h1>
 <div class="details">
-<span id="revnumber">version 2.0,</span>
-<span id="revdate">22 Jun 2022</span>
+<span id="revnumber">version 2.1,</span>
+<span id="revdate">30 Nov 2022</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -480,7 +480,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#ssec-domainspec">7.2. Domain specification</a></li>
 <li><a href="#ssec-statsspec">7.3. Analysis options specification</a></li>
 <li><a href="#ssec-obssrc">7.4. Data stream sources</a></li>
-<li><a href="#ssec-optue">7.5. OptUE processing options</a></li>
+<li><a href="#_optue_processing_options">7.5. OptUE processing options</a></li>
 <li><a href="#ssec-dastatrunmode">7.6. DA diagnostics analysis</a></li>
 <li><a href="#ssec-daobsrunmode">7.7. DA observation analysis</a></li>
 <li><a href="#ssec-557postrunmode">7.8. 557 post</a></li>
@@ -521,6 +521,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LISF 557WW 7.5.0 release</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nov 30, 2022</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LISF Public 7.4.0 release</p></td>
@@ -2175,6 +2180,10 @@ GeoTIFF means the GeoTIFF support provided by the GDAL library.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#8220;GRUN runoff&#8221;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GRUN runoff data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8220;COAMPSout&#8221;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COAMPS forcing data</p></td>
 </tr>
 </tbody>
 </table>
@@ -5626,9 +5635,35 @@ OzFlux station list file:     ../OzFlux/stnlist.dat</pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="ssec-optue">7.4.74. COAMPS forcing data</h4>
+<div class="paragraph">
+<p><code>COAMPS output forcing directory:</code> specifies the location of the COAMPS output forcing data directory.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>lvt.config</em> entry</div>
+<div class="content">
+<pre>COAMPS output forcing directory: ../COAMPS/EU/COAMPS_forcing</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>COAMPS nest id:</code> specifies the nest id.</p>
+</div>
+<div class="paragraph">
+<p>COAMPS forcing usually provides forcing for 2 nests. The first nest
+is 15km resolution and the second nest is a smaller sub-domain with
+a resolution of 5km.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>lvt.config</em> entry</div>
+<div class="content">
+<pre>COAMPS nest id: 1</pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="ssec-optue">7.5. OptUE processing options</h3>
+<h3 id="_optue_processing_options">7.5. OptUE processing options</h3>
 <div class="paragraph">
 <p>This section of the config file specifies the details of the optimization and uncertainty estimation processing options, and the specicialized options to analyze outputs from the Optimization/Uncertainy Estimation algorithms.</p>
 </div>
@@ -6190,6 +6225,32 @@ Number of state variables in the DA update: 4</pre>
 <div class="title">Example <em>lvt.config</em> entry</div>
 <div class="content">
 <pre>Number of vertical levels in the LIS output: 4</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>LIS output number of soil moisture layers:</code> specifies the number of soil moisture layers used in the LIS output. This is optional and defaults to 0.</p>
+</div>
+<div class="paragraph">
+<p><code>LIS output soil moisture layer thickness:</code> specifies the number of soil moisture layers used in the LIS output. These values will be written to the NetCDF as global attributes and should match those used in the LIS configuration file to define the LSM soil moisture layer thicknesses. If the number of soil moisture layers is omitted or set to 0, this entry is not read and soil moisture layer thicknesses are not written to the NetCDF global attributes.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>lvt.config</em> entry</div>
+<div class="content">
+<pre>LIS output number of soil moisture layers:  4
+LIS output soil moisture layer thickness: 0.1 0.3 0.6 1.0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>LIS output number of soil temperature layers:</code> specifies the thicknesses of soil moisture layers in the LIS output. This is optional and defaults to 0.</p>
+</div>
+<div class="paragraph">
+<p><code>LIS output soil temperature layer thickness:</code> specifies the thicknesses of soil temperature layers in the LIS output. These values will be written to the NetCDF as global attributes and should match those used in the LIS configuration file to define the LSM soil temperature layer thicknesses. If the number of soil temperature layers is omitted or set to 0, this entry is not read and soil temperature layer thicknesses are not written to the NetCDF global attributes.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>lvt.config</em> entry</div>
+<div class="content">
+<pre>LIS output number of soil temperature layers:  4
+LIS output soil temperature layer thickness:  0.1 0.3 0.6 1.0</pre>
 </div>
 </div>
 </div>
@@ -7041,8 +7102,8 @@ rmse_qle_ensSTD rmse_qle_CI
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 2.0<br>
-Last updated 2022-11-12 15:52:12 UTC
+Version 2.1<br>
+Last updated 2023-01-23 16:24:41 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">

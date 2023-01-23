@@ -440,8 +440,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Land Data Toolkit (LDT): LDT 7.4 Users&#8217; Guide</h1>
 <div class="details">
-<span id="revnumber">version 2.0,</span>
-<span id="revdate">22 Jun 2022</span>
+<span id="revnumber">version 2.1,</span>
+<span id="revdate">30 Nov 2022</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -532,6 +532,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LISF 557WW 7.5.0 release</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nov 30, 2022</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LISF Public 7.4.0 release</p></td>
@@ -1752,6 +1757,10 @@ LIBGEOTIFF means GeoTIFF support provided by the GeoTIFF library.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Catchment, Fortuna 2.5</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SnowModel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SnowModel</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SAC.3.5.6</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sacramento</p></td>
 </tr>
@@ -2942,6 +2951,14 @@ Run domain resolution:                40</pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CLM45</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CLM-4.5 landcover dataset.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NALCMS_SM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SnowModel-based NALCMS landcover dataset.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NALCMS_SM_IGBPNCEP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SnowModel-based NALCMS landcover dataset with IGBPNCEP-mapped classes.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CONSTANT</p></td>
@@ -4672,6 +4689,10 @@ Soil color resolution (dy):        0.2500</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MERIT_1K</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The MERIT elevation map, but processed by LISF-team to have a resolution &#8216;0.008333&#8217;. See: <a href="http://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_DEM/index.html" class="bare">http://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_DEM/index.html</a></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NED_SM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SnowModel-based National Elevation Dataset (NED) topographic fields.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="literalblock">
@@ -5960,6 +5981,216 @@ Bottom temperature resolution (dy):      0.2500</pre>
 </div>
 </div>
 <div class="paragraph">
+<p>Miguez-Macho and Fan (MMF) Groundwater Parameters</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Currently, Noah-MP.4.0.1 is the only land surface model that supports the MMF groundwater scheme.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>Process Noah-MP-4.0.1 MMF groundwater parameters:</code> specifies whether to process Noah-MP-4.0.1 MMF groundwater parameters. Acceptable values are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.false.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">do not process (default)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.true.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">process</p></td>
+</tr>
+</tbody>
+</table>
+<div class="literalblock">
+<div class="title">Example <em>ldt.config</em> entry</div>
+<div class="content">
+<pre>Process Noah-MP-4.0.1 MMF groundwater parameters: .true.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The Noah-MP-4.0.1 parameters are only needed when running option "5" for the following lis.config entry when running LIS:</p>
+</div>
+<div class="paragraph">
+<p><code>Noah-MP.4.0.1 runoff and groundwater option: 5</code></p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+The MMF groundwater option (option 5) is not yet supported in LIS. Work on this feature is currently in progress.
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>MMF transmissivity dir:</code> specifies the location of the directory containing FDEPTH (transmissivity e-folding depth [m]) data on GEOGRID tiles.</p>
+</div>
+<div class="paragraph">
+<p><code>MMF climatological recharge dir:</code> specifies the location of the directory containing RECHARGE (climatological recharge [mm]) data on GEOGRID tiles.</p>
+</div>
+<div class="paragraph">
+<p><code>MMF riverbed elevation dir:</code> specifies the location of the directory containing RIVERBED (riverbed elevation [m]) data on GEOGRID tiles.</p>
+</div>
+<div class="paragraph">
+<p><code>MMF equilibrium water table depth dir:</code> specifies the location of the directory containing EQWTD (equilibrium water table depth [m]) data on GEOGRID tiles.</p>
+</div>
+<div class="paragraph">
+<p><code>MMF HGT_M dir:</code> specifies the location of the directory containing GMTED2010 (30-arc-second topography height [m from MSL]) data on GEOGRID tiles.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>ldt.config</em> entry</div>
+<div class="content">
+<pre>MMF transmissivity dir:                ./LS_PARAMETERS/noahmp401_parms/groundwater/f/
+MMF climatological recharge dir:       ./LS_PARAMETERS/noahmp401_parms/groundwater/recharge/
+MMF riverbed elevation dir:            ./LS_PARAMETERS/noahmp401_parms/groundwater/riverbed/
+MMF equilibrium water table depth dir: ./LS_PARAMETERS/noahmp401_parms/groundwater/wtd/
+MMF HGT_M dir:                         ./LS_PARAMETERS/noahmp401_parms/groundwater/topo_gmted2010_30s/</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Spatial interpolation and gap filling parameters for each MMF variable are also required. See the config entries below.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www2.mmm.ucar.edu/wrf/users/docs/user_guide_v4/v4.3/users_guide_chap3.html#_Description_of_GEOGRID.TBL" target="_blank" rel="noopener">The WRF User&#8217;s Guide</a> (and <a href="https://github.com/wrf-model/WPS/blob/master/geogrid/GEOGRID.TBL.ARW.noahmp" target="_blank" rel="noopener">WPS/WPS-4.0.1/geogrid/GEOGRID.TBL.ARW.noahmp</a>) describe WPS&#8217;s MMF parameter preprocessing procedures from the GEOGRID grid to the model grid. WPS performing the entire interpolation process from aggregating to gap filling on the native GEOGRID space makes it fundamentally different to LDT because LDT first aggregates input data from the native grid to the model grid and then fills gaps on the model grid space. The current LDT implementation of MMF parameter preprocessing does not attempt to replicate the WPS interpolation procedures, instead, it uses existing LDT interpolation utilities to follow the WPS&#8217;s interpolation concept.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>MMF map projection:</code> map projection parameter is always set to latlon for MMF parameters.</p>
+</div>
+<div class="paragraph">
+<p><code>MMF spatial transform:</code> spatial transform parameter is always set to average for MMF parameters.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>ldt.config</em> entry</div>
+<div class="content">
+<pre>MMF map projection:    latlon
+MMF spatial transform: average</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>FDEPTH fill option:</code> specifies the MMF parameter fill option (<code>neighbor</code> is preferred).</p>
+</div>
+<div class="paragraph">
+<p><code>FDEPTH fill radius:</code> specifies the radius with which to search for nearby value(s) to help fill in the missing value (0 is preferred).</p>
+</div>
+<div class="paragraph">
+<p><code>FDEPTH fill value:</code> indicates the parameter value to be used if an arbitrary value fill is needed.</p>
+</div>
+<div class="paragraph">
+<p><code>FDEPTH water value:</code> MMF scheme is active in lake/water grid cells. Thus, a suitable FDEPTH value in lakes/rivers is needed in case GEOGRID didn&#8217;t have valid data at the location.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>ldt.config</em> entry</div>
+<div class="content">
+<pre>FDEPTH fill option: neighbor
+FDEPTH fill radius: 0.
+FDEPTH fill value: 100.
+FDEPTH water value: 100.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>RECHCLIM fill option:</code> specifies the MMF parameter fill option (<code>neighbor</code> is preferred).</p>
+</div>
+<div class="paragraph">
+<p><code>RECHCLIM fill radius:</code> specifies the radius with which to search for nearby value(s) to help fill in the missing value (0 is preferred).</p>
+</div>
+<div class="paragraph">
+<p><code>RECHCLIM fill value:</code> indicates the parameter value to be used if an arbitrary value fill is needed.</p>
+</div>
+<div class="paragraph">
+<p><code>RECHCLIM water value:</code> MMF scheme is active in lake/water grid cells. Thus, a suitable RECHCLIM value in lakes/rivers is needed in case GEOGRID didn&#8217;t have valid data at the location.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>ldt.config</em> entry</div>
+<div class="content">
+<pre>RECHCLIM fill option: neighbor
+RECHCLIM fill radius: 0.
+RECHCLIM fill value:  -1.
+RECHCLIM water value: -1.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>EQWTD fill option:</code> specifies the MMF parameter fill option (<code>neighbor</code> is preferred).</p>
+</div>
+<div class="paragraph">
+<p><code>EQWTD fill radius:</code> specifies the radius with which to search for nearby value(s) to help fill in the missing value.</p>
+</div>
+<div class="paragraph">
+<p><code>EQWTD fill value:</code> indicates the parameter value to be used if an arbitrary value fill is needed.</p>
+</div>
+<div class="paragraph">
+<p><code>EQWTD water value:</code> MMF scheme is active in lake/water grid cells. Thus, a suitable EQWTD value in lakes/rivers is needed in case GEOGRID didn&#8217;t have valid data at the location.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>ldt.config</em> entry</div>
+<div class="content">
+<pre>EQWTD fill option: neighbor
+EQWTD fill radius: 0.
+EQWTD fill value: 0.
+EQWTD water value: 0.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>HGT_M fill option:</code> specifies the MMF parameter fill option (<code>neighbor</code> is preferred).</p>
+</div>
+<div class="paragraph">
+<p><code>HGT_M fill radius:</code> specifies the radius with which to search for nearby value(s) to help fill in the missing value.</p>
+</div>
+<div class="paragraph">
+<p><code>HGT_M fill value:</code> indicates the parameter value to be used if an arbitrary value fill is needed.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>ldt.config</em> entry</div>
+<div class="content">
+<pre>HGT_M fill option: neighbor
+HGT_M fill radius: 0.
+HGT_M fill value: 0.</pre>
+</div>
+</div>
+<div class="paragraph">
 <p>If selecting the Community Land Model (4.5 version), the following config entires are also required.</p>
 </div>
 <div class="paragraph">
@@ -6027,6 +6258,34 @@ CLM45 upper right lat:                    90.0
 CLM45 upper right lon:                   359.375
 CLM45 resolution (dx):                     1.25
 CLM45 resolution (dy):                     0.9424060</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If selecting Glen Liston&#8217;s SnowModel, the following config entires are required.</p>
+</div>
+<div class="paragraph">
+<p><code>Snowmodel topo-veg data source:</code> specifies which pre-processed SnowModel parameters and file format type to be read in. Currently, only the &#8220;Grads_binary&#8221; option is available.</p>
+</div>
+<div class="paragraph">
+<p><code>Snowmodel topo-veg map:</code> specifies the directory-file location of the pre-processed SnowModel topographic and vegetation class parameters.</p>
+</div>
+<div class="paragraph">
+<p><code>Snowmodel topo-veg spatial transform:</code> specifies the type of grid transform for preprocessed SnowModel topographic and vegetation class parameters. Currently, this option is not yet supported and user option is only &#8220;none&#8221; at this time.</p>
+</div>
+<div class="paragraph">
+<p><code>Snowmodel topo-veg map projection:</code> specifies the SnowModel parameter file projection. Currently, SnowModel parameter projection needs to be set to the same as the LIS domain projection, for now. SnowModel parameters are best provided either on a Lambert projection (in LIS) and supports some equal-area projection grids, like UTM, which is available in LIS. Future support for more options will be added.</p>
+</div>
+<div class="paragraph">
+<p><code>Snowmodel topo-veg fill option:</code> specifies the type of fill option used with SnowModel parameters. Currently, this feature is not supported, and will be in future versions.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>ldt.config</em> entry</div>
+<div class="content">
+<pre>Snowmodel topo-veg data source:     "Grads_binary"
+Snowmodel topo-veg map:        ../SnowModel_Inputs/uppertuo_100m/topo_vege.gdat
+Snowmodel topo-veg spatial transform:  "none"
+Snowmodel topo-veg map projection:    lambert
+Snowmodel topo-veg fill option:        none</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -17480,8 +17739,8 @@ param domain sections on a UTM projection.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 2.0<br>
-Last updated 2022-11-12 15:52:12 UTC
+Version 2.1<br>
+Last updated 2023-01-23 16:24:41 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
