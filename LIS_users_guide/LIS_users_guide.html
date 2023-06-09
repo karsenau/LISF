@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>Land Information System (LIS): LIS 7.4 Users&#8217; Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -440,8 +437,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Land Information System (LIS): LIS 7.4 Users&#8217; Guide</h1>
 <div class="details">
-<span id="revnumber">version 2.1,</span>
-<span id="revdate">30 Nov 2022</span>
+<span id="revnumber">version 2.2,</span>
+<span id="revdate">5 May 2023</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -560,6 +557,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LISF 557WW 7.5.4 release</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">May 5, 2023</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LISF 557WW 7.5.0 release</p></td>
@@ -5890,6 +5892,10 @@ Acceptable values for the sources are:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MERRA2</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8220;GEOS-IT&#8221;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GEOS-IT</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#8220;CMAP&#8221;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CMAP</p></td>
 </tr>
@@ -6488,6 +6494,10 @@ Acceptable values are:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#8220;WMO convention&#8221;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">WMO convention for weather codes</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8220;557WW streamflow convention&#8221;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">557WW convention for streamflow output</p></td>
+</tr>
 </tbody>
 </table>
 <div class="literalblock">
@@ -6495,6 +6505,45 @@ Acceptable values are:</p>
 <div class="content">
 <pre>Output naming style: "3 level hierarchy"</pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The &#8220;557WW streamflow convention&#8221; has 4 additional settings:</p>
+</div>
+<div class="paragraph">
+<p><code>AGRMET security classification:</code> used with 557WW streamflow convention or AGRMET Ops runmode.</p>
+</div>
+<div class="paragraph">
+<p><code>AGRMET distribution classification:</code> used with 557WW streamflow convention or AGRMET Ops runmode.</p>
+</div>
+<div class="paragraph">
+<p><code>AGRMET data category:</code> used with 557WW streamflow convention or AGRMET Ops runmode.</p>
+</div>
+<div class="paragraph">
+<p><code>AGRMET area of data:</code> used with 557WW streamflow convention or AGRMET Ops runmode.</p>
+</div>
+<div class="paragraph">
+<p>See Section <a href="#sssec_forcings_afwa">AFWA/AGRMET</a> for more information.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>lis.config</em> entry</div>
+<div class="content">
+<pre>Output naming style: "557WW streamflow convention"
+AGRMET security classification:     U
+AGRMET distribution classification: C
+AGRMET data category:               ANLYS
+AGRMET area of data:                GLOBAL</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><code>Enable output statistics:</code> specifies whether to write the ASCII
@@ -14244,7 +14293,86 @@ MERRA2 use corrected total precipitation:  1</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sssec_forcings_ERA5">9.9.9. ERA5</h4>
+<h4 id="sssec_forcings_GEOS-IT">9.9.9. GEOS-IT</h4>
+<div class="paragraph">
+<p><code>GEOS-IT forcing directory:</code> specifies the location of
+the GEOS-IT forcing files.</p>
+</div>
+<div class="paragraph">
+<p>Please note that GEOS-IT is currently in production and is
+not complete for all calendar years.  Also, it is not yet
+available outside of NASA&#8217;s NCCS computing platforms.
+Also, the topographic or elevation correction option is
+supported through the MERRA-2 geopotential terrain height
+file.  Please also see the latest LDT notes for updates on
+how to use this option.</p>
+</div>
+<div class="paragraph">
+<p><code>GEOS-IT use lowest model level forcing:</code> specifies whether
+to use the lowest model level forcing.
+Acceptable values are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Do not use the lowest model level forcing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use the lowest model level forcing.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>GEOS-IT use 2m wind fields:</code> specifies whether to use the
+2m diagnosed wind fields.  This option will only work if
+the lowest model level forcing option is turned off.
+Acceptable values are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Do not use the 2m diagnosed wind speed fields.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use the 2m diagnosed wind speed fields.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="literalblock">
+<div class="title">Example <em>lis.config</em> entry</div>
+<div class="content">
+<pre>GEOS-IT forcing directory:                  ./GEOS-IT
+GEOS-IT use lowest model level forcing:     1
+GEOS-IT use 2m wind fields:                 0</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sssec_forcings_ERA5">9.9.10. ERA5</h4>
 <div class="paragraph">
 <p><code>ERA5 forcing directory:</code> specifies the location of
 the ERA5 forcing files.</p>
@@ -14262,7 +14390,7 @@ ERA5 forcing tile to grid mapping file: ../ERA5/mapping.nc</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sssec_forcings_gswp1">9.9.10. GSWP1</h4>
+<h4 id="sssec_forcings_gswp1">9.9.11. GSWP1</h4>
 <div class="paragraph">
 <p><code>GSWP1 forcing directory:</code> specifies the location of the
 GSWP1 forcing files.</p>
@@ -23316,8 +23444,8 @@ Program stopping..</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 2.1<br>
-Last updated 2023-03-14 18:20:39 UTC
+Version 2.2<br>
+Last updated 2023-06-09 01:22:14 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
