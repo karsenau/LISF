@@ -437,8 +437,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Land Information System (LIS): LIS 7.4 Users&#8217; Guide</h1>
 <div class="details">
-<span id="revnumber">version 2.2,</span>
-<span id="revdate">5 May 2023</span>
+<span id="revnumber">version 2.5,</span>
+<span id="revdate">05 Jul 2023</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -557,6 +557,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LISF 557WW 7.5.9 release</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jul 05, 2023</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LISF 557WW 7.5.8 release</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jun 30, 2023</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LISF 557WW 7.5.5 release</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jun 20, 2023</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LISF 557WW 7.5.4 release</p></td>
@@ -6498,6 +6513,10 @@ Acceptable values are:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#8220;557WW streamflow convention&#8221;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">557WW convention for streamflow output</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8220;557WW medium range forecast convention&#8221;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">557WW convention for medium range forecast output</p></td>
+</tr>
 </tbody>
 </table>
 <div class="literalblock">
@@ -6514,19 +6533,19 @@ Acceptable values are:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The &#8220;557WW streamflow convention&#8221; has 4 additional settings:</p>
+<p>The &#8220;557WW streamflow convention&#8221; and &#8220;557WW medium range forecast convention&#8221; have 4 additional settings:</p>
 </div>
 <div class="paragraph">
-<p><code>AGRMET security classification:</code> used with 557WW streamflow convention or AGRMET Ops runmode.</p>
+<p><code>AGRMET security classification:</code> used with 557WW streamflow convention, 557WW medium range forecast convention, or AGRMET Ops runmode.</p>
 </div>
 <div class="paragraph">
-<p><code>AGRMET distribution classification:</code> used with 557WW streamflow convention or AGRMET Ops runmode.</p>
+<p><code>AGRMET distribution classification:</code> used with 557WW streamflow convention, 557WW medium range forecast convention, or AGRMET Ops runmode.</p>
 </div>
 <div class="paragraph">
-<p><code>AGRMET data category:</code> used with 557WW streamflow convention or AGRMET Ops runmode.</p>
+<p><code>AGRMET data category:</code> used with 557WW streamflow convention, 557WW medium range forecast convention, or AGRMET Ops runmode.</p>
 </div>
 <div class="paragraph">
-<p><code>AGRMET area of data:</code> used with 557WW streamflow convention or AGRMET Ops runmode.</p>
+<p><code>AGRMET area of data:</code> used with 557WW streamflow convention, 557WW medium range forecast convention, or AGRMET Ops runmode.</p>
 </div>
 <div class="paragraph">
 <p>See Section <a href="#sssec_forcings_afwa">AFWA/AGRMET</a> for more information.</p>
@@ -6544,6 +6563,37 @@ AGRMET area of data:                GLOBAL</pre>
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p><code>Number of dimensions in the lat/lon output fields:</code> specifies the number of dimensions to use when writing the latitude and longitude fields of the LIS output. This is an optional entry. If this entry is not used, LIS will attempt to write the lat/lon fields in 1D.  If the projection being used is not compatible with 1D, LIS will write in 2D.
+Acceptable values are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"1D"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 dimensional latitude and longitude output
+            (Note: Only the latlon projection supports 1D output)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"2D"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 dimensional latitude and longitude output</p></td>
+</tr>
+</tbody>
+</table>
+<div class="literalblock">
+<div class="title">Example <em>lis.config</em> entry</div>
+<div class="content">
+<pre>Number of dimensions in the lat/lon output fields:          "1D"</pre>
+</div>
 </div>
 <div class="paragraph">
 <p><code>Enable output statistics:</code> specifies whether to write the ASCII
@@ -23444,8 +23494,8 @@ Program stopping..</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2<br>
-Last updated 2023-06-09 01:22:22 UTC
+Version 2.5<br>
+Last updated 2023-08-07 21:01:45 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
