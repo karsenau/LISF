@@ -134,18 +134,18 @@ Modify the configuration to isolate and optimize the failed model:
 
 **b) Isolate the failed model:**
 ```yaml
-# Change from:
+Change from:
 NMME_models: [CanESM5, CESM1, CFSv2, GEOSv2, GFDL, GNEMO52]
-
-# To:
+To:
 NMME_models: [CESM1]
 ```
+
 **c) Increase job segmentation to reduce walltime requirements:**
 ```yaml
 Change from:
 JOB_SEGMENTS:
     CESM1: 3    # [1-3], [4-6], [7-9]
-# To:
+To:
 JOB_SEGMENTS:
     CESM1: 5    # [1-2], [3-4], [5-6], [7-8], [9]
 ```
@@ -158,7 +158,7 @@ S2S_STEP: "FCST"
 ONE_STEP: True
 CONFIG_FILE: s2s_config_cesm1
 
-# This creates workflow ID: cylc_fcst_202510
+This creates workflow ID: **cylc_fcst_202510**
 cylc install --symlink-dirs=run=$LOGDIR
 ```
 
@@ -170,7 +170,7 @@ S2S_STEP: "POST"
 ONE_STEP: False
 CONFIG_FILE: s2s_config_global_fcst
 
-# This creates workflow ID: cylc_post_202510
+This creates workflow ID: **cylc_post_202510**
 cylc install --symlink-dirs=run=$LOGDIR
 ```
 
