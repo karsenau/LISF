@@ -354,6 +354,26 @@ class S2Srun(DownloadForecasts):
         with open(config_file, 'r', encoding="utf-8") as file:
             self.config = yaml.safe_load(file)
         self.config_file = config_file
+
+        # Check for new s2s_config user_cache_dir option for HPC11:
+        if 'discover' not in platform.node() and 'borg' not in platform.node():
+            if 'user_cache_dir' not in self.config['SETUP']:
+                print("[WARNING] s2s_config SETUP: entry -- user_cache_dir:  not specified!")
+                print("[WARNING]  Exiting S2S E2ES setup ... ")
+                sys.exit()
+            else:
+                test_file = self.config['SETUP']['user_cache_dir'] + '/write_test'
+                result = subprocess.run(['touch', str(test_file)], capture_output=True,
+                    text=True, timeout=10)
+                if result.returncode != 0:
+                    print(f"[WARNING] {self.config['SETUP']['user_cache_dir']} does not have write permission !")
+                    print(" Please specify writeable s2s_config SETUP: entry -- user_cache_dir:")
+                    sys.exit()
+                else:
+                    os.remove(test_file)
+                    print(" -- Using a user-designated cache directory from the s2s_config file --")
+                    print(f" {self.config['SETUP']['user_cache_dir']}")
+
         self.year = year
         self.month = month
         self.yyyy = f'{year:04d}'
@@ -1609,7 +1629,8 @@ class S2Srun(DownloadForecasts):
         # processing monthlies multi tasks per job
         jobname='s2spost_mon_'
         prev = sorted(glob.glob("s2spost_0*_run.j"))
-        l_sub = 9
+        # l_sub = 9
+        l_sub = 6
         slurm_sub = self.split_list(monthly_commands, l_sub)
         for i, sub_val in enumerate(slurm_sub):
             tfile = self.sublist_to_file(sub_val, cwd)
@@ -1979,17 +2000,34 @@ if __name__ == "__main__":
     # Print SLURM job report
     if  args.report:
         JOB_SCHEDULE = os.path.join(s2s.scrdir, 'SLURM_JOB_SCHEDULE')
+
         if os.path.exists(JOB_SCHEDULE):
             CMD = f"s2s_app/s2s_run.sh -y {args.year} -m {args.month} -c {args.config_file} -r Y"
-            process = subprocess.run(CMD, shell=True, check=True)
+            print(f"Executing scheduled job report: {CMD}")
+            # process = subprocess.run(CMD, shell=True, check=True)
+            process = subprocess.run(CMD, shell=True, check=False)
+
         else:
+            # -- For cylc_walltime.sh --
             if args.step is None:
                 CYLC_WORKFLOW = f'cylc_e2e_{s2s.yyyy}{s2s.mm}'
             else:
                 CYLC_WORKFLOW = f'cylc_{args.step.lower()}_{s2s.yyyy}{s2s.mm}'
+
             CMD = f"sh s2s_app/cylc_walltime.sh {CYLC_WORKFLOW}"
-            process = subprocess.run(CMD, shell=True, check=True)
-        sys.exit()
+            print(f"Executing Cylc report: {CMD}")
+            # process = subprocess.run(CMD, shell=True, check=True)
+            process = subprocess.run(CMD, shell=True, check=False)
+
+        # Check the return code from *either* of the commands that ran
+        if process.returncode != 0:
+            print(
+                "The E2ES step(s) are still in progress and have not yet completed."
+                " Please check back again soon."
+            )
+            sys.exit(process.returncode)
+
+        sys.exit(0)
 
     # Write LOG file
     if args.logging:

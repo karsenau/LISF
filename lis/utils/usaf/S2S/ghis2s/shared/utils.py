@@ -20,6 +20,7 @@
 # REVISION HISTORY:
 #  7 Mar 2022: Sarith Mahanama, first version
 # 22 Oct 2024: K. Arsenault, updated to account for srun submissions on discover
+# 25 Nov 2025: S. Mahanama, K. Arsenault, updated with new cache dir option
 #
 #------------------------------------------------------------------------------
 """
@@ -144,6 +145,15 @@ def job_script(s2s_configfile, jobfile, job_name, ntasks, hours, cwd,
             _f.write('export NUM_WORKERS='+ parallel_run['CPT'] + '\n')
         _f.write('cd ' + cwd + '\n')
 
+        # To handle MPLCONFIG and Cache home dir write situation,
+        #  where home or /tmp are read-only from compute nodes:
+        if 'discover' not in platform.node() or 'borg' not in platform.node():
+            if 'user_cache_dir' in cfg['SETUP']:
+                # print(" -- Using a user-designated cache directory from the s2s_config file --")
+                _f.write(f"export USER_CACHE_DIR=\"/{cfg['SETUP']['user_cache_dir']}/ghis2s_python_cache_$$\" \n")
+                _f.write('export MPLCONFIGDIR="$USER_CACHE_DIR" \n')
+                _f.write('export XDG_CACHE_HOME="$USER_CACHE_DIR" \n')
+
         _f.write("PIDS=()\n")
         if command_list is None and group_jobs is None:
             _f.write(f"{this_command} || exit 1\n")
@@ -177,7 +187,7 @@ done
         _f.write('\n')
         _f.write('echo "[INFO] Completed ' + job_name + '!"' + '\n')
         _f.write('\n')
-        _f.write('sleep 60' + '\n')
+        _f.write('sleep 90' + '\n')
         _f.write('\n')
         _f.write('exit 0' + '\n')
     _f.close()
