@@ -438,8 +438,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Land Information System (LIS): LIS 7.5 Users Guide</h1>
 <div class="details">
-<span id="revnumber">version 4.1,</span>
-<span id="revdate">21 Nov 2025</span>
+<span id="revnumber">version 5.0,</span>
+<span id="revdate">16 Jan 2026</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -558,6 +558,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LISF 557WW 7.7.0 release</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jan 16, 2025</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">4.1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LISF 557WW 7.6.1 release</p></td>
@@ -7765,6 +7770,10 @@ Acceptable values are:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#8220;GLASS Albedo&#8221;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GLASS Albedo (black-sky and white-sky)</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8220;SWOT water level&#8221;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SWOT water surface elevation</p></td>
+</tr>
 </tbody>
 </table>
 <div class="literalblock">
@@ -10621,7 +10630,7 @@ whether to use CDF transfer method.</p>
 <p><code>Reference domain model CDF file:</code> specifies the reference domain model CDF name and data directory.</p>
 </div>
 <div class="paragraph">
-<p><code>Reference domain obs CDF file:</code> specifies the reference domain obs CDF name and data directory.</p>
+<p><code>Target domain obs CDF file:</code> specifies the reference domain obs CDF name and data directory.</p>
 </div>
 <div class="paragraph">
 <p><code>Number of bins in the soil moisture CDF:</code> specifies the number of bins in the CDF.</p>
@@ -10861,6 +10870,26 @@ SNODAS data.</p>
 <div class="title">Example <em>lis.config</em> entry</div>
 <div class="content">
 <pre>SNODAS snow depth data directory:                  ./FORCING/SNODAS</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sssec_swotwlda">9.5.44. SWOT water level assimilation</h4>
+<div class="paragraph">
+<p><code>SWOT water level data directory:</code> specifies the SWOT water level data directory.</p>
+</div>
+<div class="paragraph">
+<p><code>SWOT water level map:</code> specifies the assimilation map file and its associated sequential ID.</p>
+</div>
+<div class="paragraph">
+<p><code>Data assimilation frequency::</code> specifies the DA frequency: minimum 15mn and maximum 1da.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example <em>lis.config</em> entry</div>
+<div class="content">
+<pre>SWOT water level data directory:             ./input/SWOT_obs
+SWOT water level map:                        ./SWOT_lis_id.nc
+Data assimilation frequency                  "15mn"</pre>
 </div>
 </div>
 </div>
@@ -22601,6 +22630,39 @@ active restart file.</p>
 <p><code>HYMAP2 2-way coupling flooded fraction threshold:</code> specifies the flooded fraction
 threshold used in the 2-way coupling mode.</p>
 </div>
+<div class="paragraph">
+<p><code>HYMAP2 use localization update in DA:</code> specifies whether to enable the localization
+scheme for DA.</p>
+</div>
+<div class="paragraph">
+<p>Acceptable values are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Do not use localization</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use localization for DA</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>HYMAP2 localization update window size:</code> specifies localization update window size.</p>
+</div>
+<div class="paragraph">
+<p><code>HYMAP2 localization weight map:</code> specifies the file location of the localization weight map.</p>
+</div>
 <div class="literalblock">
 <div class="title">Example <em>lis.config</em> entry</div>
 <div class="content">
@@ -22623,8 +22685,13 @@ HYMAP2 routing model dwi flag: 0
 HYMAP2 routing model start mode: "coldstart"
 HYMAP2 routing model restart interval: "1mo"
 HYMAP2 routing model restart file: "./OL/ROUTING/197901/LIS_RST_HYMAP2_router_197901030000.d01.nc
+
 HYMAP2 enable 2-way coupling: 0
-HYMAP2 2-way coupling flooded fraction threshold: 0.1</pre>
+HYMAP2 2-way coupling flooded fraction threshold: 0.1
+
+HYMAP2 use localization update in DA: 0
+HYMAP2 localization update window size: 10
+HYMAP2 localization weight map: ./input/localization_map/distance_map_full_ohio_010.nc</pre>
 </div>
 </div>
 </div>
@@ -22973,6 +23040,34 @@ active restart file.</p>
 <p><code>HYMAP3 2-way coupling flooded fraction threshold:</code> specifies the flooded fraction
 threshold used in the 2-way coupling mode.</p>
 </div>
+<div class="paragraph">
+<p><code>HYMAP3 runoff bias correction:</code> specifies whether to account for a runoff bias correction. This option is elective and, if not defined, HYMAP3 does not account for runoff bias correction. This option requires a runoff bias correction field provided in the LIS domain and parameter data file (HYMAP_runoff_bias_correction).</p>
+</div>
+<div class="paragraph">
+<p>Acceptable values are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Do not use</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use</p></td>
+</tr>
+</tbody>
+</table>
 <div class="literalblock">
 <div class="title">Example <em>lis.config</em> entry</div>
 <div class="content">
@@ -22995,7 +23090,8 @@ HYMAP3 routing model start mode: "coldstart"
 HYMAP3 routing model restart interval: "1mo"
 HYMAP3 routing model restart file: "./OL/ROUTING/197901/LIS_RST_HYMAP3_router_197901030000.d01.nc
 HYMAP3 enable 2-way coupling: 0
-HYMAP3 2-way coupling flooded fraction threshold: 0.1</pre>
+HYMAP3 2-way coupling flooded fraction threshold: 0.1
+HYMAP3 runoff bias correction: 1</pre>
 </div>
 </div>
 </div>
@@ -25301,8 +25397,8 @@ Program stopping..</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 4.1<br>
-Last updated 2025-12-12 21:14:21 UTC
+Version 5.0<br>
+Last updated 2026-02-24 14:58:01 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
